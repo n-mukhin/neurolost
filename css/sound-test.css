@@ -1,0 +1,9 @@
+#soundButton {
+    display: block;
+    width: 200px;
+    height: 50px;
+    margin: 50px auto;
+    border: 1px solid black;
+    background-color: white;
+    cursor: pointer;
+}

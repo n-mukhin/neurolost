@@ -1,62 +1,54 @@
 body {
     font-family: Arial, sans-serif;
+    color: #ffd700; /* Жёлтый цвет текста */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     margin: 0;
     padding: 0;
-    background-color: #f2f2f2;
+    flex-direction: column;
+}
+
+.container {
+    background-color: rgba(0, 0, 0, 0.5); /* Чёрный цвет фона для контейнера с прозрачностью 50% */
+    padding: 20px; /* Добавляем отступы вокруг текста */
+    border-radius: 10px; /* Закругляем углы */
 }
 
 h2 {
-    text-align: center;
-    margin-top: 50px;
+    color: white; /* Жёлтый цвет для заголовков */
+    margin-top: 20px; /* Отступ сверху */
 }
 
-form {
-    width: 300px;
-    margin: 0 auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+ul {
+    list-style-type: none;
+    padding: 0;
 }
 
-label {
-    font-weight: bold;
+li {
+    margin-bottom: 10px;
 }
 
-input[type="text"],
-input[type="password"] {
-    width: calc(100% - 10px);
-    padding: 8px;
-    margin: 5px 0 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+/* Стили для всех ссылок, кроме тех, что внутри заголовка */
+body a:not(header a) {
+    color: white; /* Белый цвет текста */
+    text-decoration: none; /* Убираем стандартное подчеркивание */
+    position: relative; /* Позиционируем ссылку относительно своего контейнера */
+    overflow: hidden; /* Обрезаем лишний фон */
 }
 
-input[type="submit"] {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    background-color: #4caf50;
-    color: white;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
+body a:not(header a)::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0; /* Начальная ширина линии */
+    height: 2px; /* Толщина линии */
+    background: white; /* Белый цвет линии */
+    transition: width 0.3s ease; /* Анимация изменения ширины */
 }
 
-input[type="submit"]:hover {
-    background-color: #45a049;
-}
-
-p {
-    text-align: center;
-    margin-top: 15px;
-}
-
-a {
-    color: #007bff;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
+body a:not(header a):hover::before {
+    width: 100%; /* Расширяем линию до 100% ширины при наведении */
 }

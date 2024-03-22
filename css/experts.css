@@ -1,0 +1,101 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    color: white; /* Белый цвет текста */
+    margin: 0;
+    padding: 0;
+    background-color: #0e0e0e; /* Цвет фона */
+    display: flex;
+    justify-content: center; /* Центрируем содержимое по горизонтали */
+    align-items: center; /* Центрируем содержимое по вертикали */
+    min-height: 100vh; /* Задаем минимальную высоту, чтобы контейнер был по центру, даже если контента мало */
+}
+
+
+h2 {
+    color: white; /* Белый цвет заголовков */
+    text-align: center; /* Выравнивание по центру */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 50px; /* Отступ сверху */
+}
+
+th, td {
+    border: 1px solid #444; /* Цвет рамки таблицы */
+    padding: 8px;
+}
+
+th {
+    background-color: #333; /* Цвет фона для заголовков таблицы */
+}
+
+tr:nth-child(even) {
+    background-color: #222; /* Цвет фона для четных строк */
+}
+
+tr:hover {
+    background-color: #444; /* Цвет фона при наведении на строку */
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.container {
+    max-width: 800px; /* Ширина контейнера */
+        background-color: rgba(0, 0, 0, 0.5); /* Чёрный цвет фона для контейнера с прозрачностью 50% */
+        padding: 20px; /* Добавляем отступы вокруг текста */
+        border-radius: 10px; /* Закругляем углы */
+    
+}
+
+input[type="text"] {
+    padding: 10px; /* Внутренние отступы */
+    margin: 5px 0; /* Внешние отступы */
+    border: none; /* Убираем границы */
+    border-radius: 5px; /* Скругляем углы */
+    background-color: #333; /* Цвет фона поля ввода */
+    color: white; /* Белый цвет текста */
+}
+
+input[type="submit"] {
+    padding: 10px 20px; /* Внутренние отступы по вертикали и горизонтали */
+    margin-top: 10px; /* Отступ сверху */
+    border: none; /* Убираем границы */
+    border-radius: 5px; /* Скругляем углы */
+    background-color: #007bff; /* Цвет кнопки */
+    color: white; /* Белый цвет текста кнопки */
+    cursor: pointer; /* Указатель мыши при наведении */
+    transition: background-color 0.3s ease; /* Плавное изменение цвета кнопки при наведении */
+}
+
+input[type="submit"]:hover {
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+body a:not(header a) {
+    color: white; /* Белый цвет текста */
+    text-decoration: none; /* Убираем стандартное подчеркивание */
+    position: relative; /* Позиционируем ссылку относительно своего контейнера */
+    overflow: hidden; /* Обрезаем лишний фон */
+}
+
+body a:not(header a)::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0; /* Начальная ширина линии */
+    height: 2px; /* Толщина линии */
+    background: white; /* Белый цвет линии */
+    transition: width 0.3s ease; /* Анимация изменения ширины */
+}
+
+body a:not(header a):hover::before {
+    width: 100%; /* Расширяем линию до 100% ширины при наведении */
+}

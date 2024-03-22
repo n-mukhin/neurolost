@@ -10,46 +10,76 @@ if (!isset($_SESSION['user_id'])) {
 // Подключение к базе данных
 require_once "db_connect.php";
 
-// Проверяем, была ли отправлена форма
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name']) && isset($_POST['sgroup'])) {
-    $name = $_POST['name'];
-    $group = $_POST['sgroup'];
+// Проверяем, если пользователь уже вошел в систему
+if(isset($_SESSION['user_id'])){
+    $user_id = $_SESSION['user_id'];
 
-    // Подготавливаем запрос для добавления эксперта
-    $query = "INSERT INTO experts (name, sgroup) VALUES (?, ?)";
+    // Получаем информацию о пользователе
+    $query = "SELECT username, role FROM users WHERE id = ?";
     $statement = $mysqli->prepare($query);
+    $statement->bind_param("i", $user_id);
+    $statement->execute();
+    $result = $statement->get_result();
 
-    // Привязываем параметры
-    $statement->bind_param("ss", $name, $group);
+    if($result->num_rows == 1){
+        $row = $result->fetch_assoc();
+        $username = $row['username'];
+        $role = $row['role'];
+
+        // Проверяем, является ли пользователь администратором
+        $is_admin = $role === 'admin';
+
+        // Проверяем, является ли пользователь экспертом
+        $is_expert = $role === 'expert';
+    }
+}
+
+// Обработка добавления нового эксперта
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_expert'])) {
+    $name = $_POST['name'];
+    $sgroup = $_POST['sgroup'];
+    $code = $_POST['code'];
+
+    // Подготавливаем запрос для добавления нового эксперта
+    $add_query = "INSERT INTO experts (name, sgroup, code) VALUES (?, ?, ?)";
+    $add_statement = $mysqli->prepare($add_query);
+    $add_statement->bind_param("sss", $name, $sgroup, $code);
 
     // Выполняем запрос
-    if ($statement->execute()) {
-        // Эксперт успешно добавлен, перенаправляем обратно на страницу списка экспертов
+    if ($add_statement->execute()) {
+        // После успешного добавления перезагружаем страницу для обновления списка экспертов
         header("Location: experts.php");
         exit;
     } else {
-        // Ошибка при добавлении эксперта
         echo "Ошибка при добавлении эксперта: " . $mysqli->error;
     }
 }
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete']) && isset($_POST['expert_id'])) {
+
+// Обработка удаления эксперта
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
     $expert_id = $_POST['expert_id'];
 
-    // Подготавливаем запрос для удаления эксперта
-    $query = "DELETE FROM experts WHERE id = ?";
-    $statement = $mysqli->prepare($query);
+    // Удаляем записи из таблицы ratings, связанные с удаляемым экспертом
+    $delete_ratings_query = "DELETE FROM ratings WHERE user_id = ?";
+    $delete_ratings_statement = $mysqli->prepare($delete_ratings_query);
+    $delete_ratings_statement->bind_param("i", $expert_id);
 
-    // Привязываем параметр
-    $statement->bind_param("i", $expert_id);
+    // Выполняем запрос на удаление записей из таблицы ratings
+    if ($delete_ratings_statement->execute()) {
+        // После успешного удаления записей из ratings, удаляем самого эксперта
+        $delete_expert_query = "DELETE FROM experts WHERE id = ?";
+        $delete_expert_statement = $mysqli->prepare($delete_expert_query);
+        $delete_expert_statement->bind_param("i", $expert_id);
 
-    // Выполняем запрос
-    if ($statement->execute()) {
-        // Эксперт успешно удален, перенаправляем обратно на страницу списка экспертов
-        header("Location: experts.php");
-        exit;
+        // Выполняем запрос на удаление эксперта
+        if ($delete_expert_statement->execute()) {
+            // После успешного удаления перезагружаем страницу для обновления списка экспертов
+            header("Location: experts.php");
+            exit;
+        } else {
+            echo "Ошибка при удалении эксперта: " . $mysqli->error;
+        }
     } else {
-        // Ошибка при удалении эксперта
-        echo "Ошибка при удалении эксперта: " . $mysqli->error;
+        echo "Ошибка при удалении записей из таблицы ratings: " . $mysqli->error;
     }
 }
-?>

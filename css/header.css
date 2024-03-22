@@ -1,0 +1,43 @@
+header {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 15px 20px;
+    text-align: right;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+
+header p {
+    color: white; /* Черный цвет текста */
+    font-size: 24px; /* Увеличенный размер шрифта */
+    margin: 0;
+    display: inline-block;
+}
+
+header nav {
+    display: inline-block; /* Чтобы nav не обтекал p */
+    margin-top: 5px; /* Небольшой отступ сверху */
+}
+
+header a {
+    background-color: darkcyan;
+    color: white; /* Белый цвет текста */
+    text-decoration: none;
+    margin-right: 50px; /* Отступ справа для каждой ссылки */
+    font-size: 18px; /* Размер шрифта */
+    padding: 5px 10px; /* Отступы внутри кнопки */
+    border-radius: 5px; /* Скругленные углы */
+    transition: all 0.3s ease; /* Плавное изменение стилей при наведении */
+}
+
+
+
+header a:hover {
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+}

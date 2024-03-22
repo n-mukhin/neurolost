@@ -1,0 +1,75 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    color: white; /* Белый цвет текста */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center; /* Центрируем содержимое по горизонтали */
+    align-items: center; /* Центрируем содержимое по вертикали */
+    height: 100vh; /* Задаем высоту вьюпорта, чтобы контент был по центру */
+    flex-direction: column;
+}
+
+.container {
+    max-width: 500px; /* Максимальная ширина контейнера */
+    padding: 20px; /* Внутренние отступы */
+    border-radius: 10px; /* Скругляем углы */
+    background-color: rgba(0, 0, 0, 0.5); /* Прозрачный черный цвет фона */
+    text-align: center; /* Выравниваем содержимое по центру */
+}
+
+h2 {
+    color: white; /* Цвет заголовка */
+    text-align: center; /* Выравниваем заголовок по центру */
+}
+
+form {
+    text-align: center; /* Выравниваем форму по центру */
+}
+
+label {
+    display: block;
+    margin-bottom: -10px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="submit"] {
+    padding: 10px; /* Внутренние отступы */
+    margin: 5px 0; /* Внешние отступы */
+    border: none; /* Убираем границы */
+    border-radius: 5px; /* Скругляем углы */
+    background-color: #333; /* Цвет фона */
+    color: white; /* Белый цвет текста */
+}
+
+input[type="submit"] {
+    cursor: pointer; /* Указатель мыши при наведении */
+    transition: background-color 0.3s ease; /* Плавное изменение цвета при наведении */
+}
+
+input[type="submit"]:hover {
+    background-color: #1affd5; /* Изменяем цвет при наведении */
+}
+
+body a:not(header a) {
+    color: white; /* Белый цвет текста */
+    text-decoration: none; /* Убираем стандартное подчеркивание */
+    position: relative; /* Позиционируем ссылку относительно своего контейнера */
+    overflow: hidden; /* Обрезаем лишний фон */
+}
+
+body a:not(header a)::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0; /* Начальная ширина линии */
+    height: 2px; /* Толщина линии */
+    background: white; /* Цвет линии */
+    transition: width 0.3s ease; /* Анимация изменения ширины */
+}
+
+body a:not(header a):hover::before {
+    width: 100%; /* Расширяем линию до 100% ширины при наведении */
+}

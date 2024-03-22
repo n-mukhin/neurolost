@@ -1,0 +1,95 @@
+body {
+    font-family: Arial, sans-serif;
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    flex-direction: column;
+}
+
+.container {
+    max-width: 800px; /* Ширина контейнера */
+        background-color: rgba(0, 0, 0, 0.5); /* Чёрный цвет фона для контейнера с прозрачностью 50% */
+        padding: 20px; /* Добавляем отступы вокруг текста */
+        border-radius: 10px; /* Закругляем углы */
+    
+}
+
+
+h2 {
+    text-align: center;
+    color: white;
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+
+}
+
+th, td {
+    border: 1px solid white;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background-color: darkcyan;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+tr:nth-child(odd) {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+form {
+    text-align: center;
+    margin-top: 20px;
+}
+
+input[type="text"],
+input[type="submit"] {
+    padding: 10px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: darkcyan;
+    color: white;
+}
+
+input[type="submit"]:hover {
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+body a:not(header a) {
+    color: white; /* Белый цвет текста */
+    text-decoration: none; /* Убираем стандартное подчеркивание */
+    position: relative; /* Позиционируем ссылку относительно своего контейнера */
+    overflow: hidden; /* Обрезаем лишний фон */
+}
+
+body a:not(header a)::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0; /* Начальная ширина линии */
+    height: 2px; /* Толщина линии */
+    background: white; /* Белый цвет линии */
+    transition: width 0.3s ease; /* Анимация изменения ширины */
+}
+
+body a:not(header a):hover::before {
+    width: 100%; /* Расширяем линию до 100% ширины при наведении */
+}

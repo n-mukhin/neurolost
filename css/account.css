@@ -1,0 +1,73 @@
+body {
+    font-family: Arial, sans-serif;
+    color: #ffd700; /* Жёлтый цвет текста */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    flex-direction: column;
+}
+
+
+h2 {
+    text-align: center;
+    color: #ffd700; /* Жёлтый цвет для заголовков */
+    margin-top: 20px; /* Отступ сверху */
+}
+
+.container {
+    background-color: rgba(0, 0, 0, 0.5); /* Чёрный цвет фона с прозрачностью 0.5 */
+    padding: 20px; /* Отступы внутри контейнера */
+    border-radius: 10px; /* Скругление углов */
+    text-align: center;
+    margin-top: 20px; /* Отступ сверху */
+}
+
+.container form {
+    margin-top: 20px; /* Отступ сверху */
+    text-align: center;
+}
+
+.container input[type="text"],
+.container input[type="password"],
+.container input[type="submit"] {
+    padding: 10px; /* Отступы внутри текстовых полей и кнопок */
+    margin: 5px; /* Внешний отступ */
+    border: none; /* Убираем границы */
+    border-radius: 5px; /* Скругляем углы */
+    background-color: #ffd700; /* Жёлтый цвет фона */
+    color: #000; /* Чёрный цвет текста */
+}
+
+.container input[type="submit"]:hover {
+    background-color: transparent; /* Прозрачный фон при наведении */
+    color: #ffd700; /* Жёлтый цвет текста при наведении */
+    border: 2px solid #ffd700; /* Жёлтая рамка при наведении */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px; /* Отступ сверху */
+}
+
+th, td {
+    border: 1px solid #ffd700; /* Жёлтая граница ячеек */
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background-color: #ffd700; /* Жёлтый цвет фона ячеек заголовков */
+    color: #000; /* Чёрный цвет текста */
+}
+
+tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.5); /* Цвет фона для четных строк с прозрачностью 0.5 */
+}
+
+tr:nth-child(odd) {
+    background-color: rgba(0, 0, 0, 0.5); /* Цвет фона для нечетных строк с прозрачностью 0.5 */
+}

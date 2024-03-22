@@ -10,56 +10,52 @@ body {
     border: 1px solid #ccc;
     padding: 10px;
 }
+
 .profession h3 {
     margin-top: 0;
 }
+
 .pvk {
+    display: flex; /* Изменено */
+    justify-content: space-between; /* Изменено */
     align-items: center;
     margin-bottom: 15px;
     margin-top: 15px;
 }
+
 .pvk-name {
     margin-right: 10px;
 }
+
 .progress-bar {
     background-color: #007bff;
     border-radius: 5px;
-    height: 20px; 
+    height: 20px;
     width: 400px;
-    margin-left: 20px;
+    /* margin-left: 20px; */
     display: inline-block;
-    
 }
+
 .progress-bar-inner {
     background-color: #28a745;
     width: 0;
     height: 100%;
     border-radius: 5px;
 }
+
 .progress-label {
     font-size: 14px;
     font-weight: bold;
     color: #333;
-    margin-left: 5px;
-    
+    /* margin-left: 5px; */
 }
+
 .expert-name {
     font-weight: bold;
     margin-right: 10px;
-    
 }
 
-
-p {
-    text-align: center;
-    margin-top: 15px;
-}
-
-a {
-    color: #007bff;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
+.user-rating {
+    display: flex; /* Добавлено */
+    align-items: center; /* Добавлено */
 }
