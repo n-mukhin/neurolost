@@ -23,29 +23,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['avgReactionTime'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/sound-test.css">
     <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/background.css">
     <title>Sound Reaction Test</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-        #soundBox {
-            width: 200px;
-            height: 200px;
-            margin: 50px auto;
-            border: 1px solid black;
-            background-color: white;
-        }
-    </style>
 </head>
 <body>
+<div class="background"></div>
 <header>
     <p><a href="index.php">Домой</a></p>
     <?php if (isset($_SESSION['username'])): ?>
         <p><a href="account.php">Личный кабинет</a></p>
     <?php endif; ?>
 </header>
+<div class = "container">
 <h2>Sound Reaction Test</h2>
+<br>
 <button id="startButton" onclick="startTest()">Start Test</button>
 <p id="instruction" style="display: none;">Click the box when you hear the sound</p>
 <button id="soundButton" style="display: none;">Услышал</button>
@@ -59,7 +50,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['avgReactionTime'])) {
 <br>
 <a href="tests.php">Назад</a>
 <br>
+<br>
 <a href="home.php">Домой</a>
+</div>
 </body>
 <script src="../js/sound_reaction_test_script.js"></script>
 </html>

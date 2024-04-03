@@ -1,9 +1,8 @@
-
 <?php
-session_start();
-
 // Подключение к базе данных
 require_once "db_connect.php";
+
+session_start();
 
 $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'Гость';
 
@@ -34,6 +33,7 @@ $result_professions = $mysqli->query($query_professions);
     <?php while ($row_profession = $result_professions->fetch_assoc()): ?>
         <div class="profession">
             <h3><?php echo $row_profession['name']; ?></h3>
+            <h3><?php echo $row_profession['name']; ?></h3>
             <p><strong>Описание:</strong> <?php echo $row_profession['description']; ?></p>
             <h4>Средняя оценка ПВК:</h4>
             <?php
@@ -58,7 +58,8 @@ $result_professions = $mysqli->query($query_professions);
                 </div>
                 <span class="progress-label"><?php echo number_format($row_expert_avg_rating['avg_rating'], 1); ?></span>
             <?php endwhile; ?>
-            
+       
+
             <?php
             // Если пользователь гость, показываем только его оценки
             if (!isset($_SESSION['user_id'])): ?>
@@ -92,12 +93,10 @@ $result_professions = $mysqli->query($query_professions);
                 $query_user_rating = "SELECT pvk.name, ratings.rating
                                       FROM ratings
                                       LEFT JOIN pvk ON ratings.pvk_id = pvk.id
-                                     
-
- WHERE ratings.profession_id = $profession_id
+                                      WHERE ratings.profession_id = $profession_id
                                       AND ratings.user_id = $user_id";
                 $result_user_rating = $mysqli->query($query_user_rating);
-                
+
                 if ($result_user_rating->num_rows > 0): ?>
                     <h4>Ваша оценка:</h4>
                     <?php while ($row_user_rating = $result_user_rating->fetch_assoc()): ?>

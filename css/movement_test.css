@@ -1,0 +1,121 @@
+#bar-square {
+  position: relative;
+  width: 600px; /* bar width */
+  height: 50px; /* bar height */
+  background-color: #f0f0f0; /* bar color */
+  border: 3px solid #ccc;
+  left: calc((100% - 600px)/2);
+  margin-bottom: 50px;
+}
+
+#bar {
+  position: absolute;
+  top: 0;
+  left: 50%; /* Place the fixed box in the middle */
+  transform: translateX(-50%);
+  width: 50px; /* fixed box width */
+  height: 100%; /* fixed box height */
+  background-color: #ccc; /* fixed box color */
+}
+
+#square {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px; /* moving box width */
+  height: 100%; /* moving box height */
+  background-color: blue; /* moving box color */
+  animation: moveSquare 3s infinite alternate; /* add motion effects */
+}
+
+#guideline-button {
+    display: inline-block;
+    height: 48px;
+    padding: 12px 28px;
+    margin-right: 5px;
+    border-radius: 5px;
+    background-color: rgb(65, 76, 159);
+    color: #FFF5EE;
+    letter-spacing: 0.15px;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    transition: opacity 0.2s ease-in;
+}
+
+#hide-input {
+  width: 350px; 
+  height: 50px; 
+  font-size: 20px; 
+  padding: 10px; 
+}
+
+.popup {
+  display: none;
+  position: fixed; 
+  z-index: 1; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgba(0,0,0,0.5);
+}
+
+.popup-content {
+  background-color: #fefefe;
+  margin: auto; 
+  padding: 15px; 
+  border-radius: 10px; 
+  width: 100vw; 
+  max-width: 600px; 
+  position: fixed;
+  top: 10vh; 
+  left: 50%;
+  transform: translateX(-50%); 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.popup-content p {
+  font-size: 24px; 
+}
+
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#stop {
+  display: inline-block;
+    height: 48px;
+    padding: 12px 28px;
+    margin-right: 5px;
+    border-radius: 5px;
+    background-color: rgb(255, 52, 52);
+    color: #FFF5EE;
+    letter-spacing: 0.15px;
+    font-size: 16px;
+    font-weight: 500;
+
+    transition: opacity 0.2s ease-in;
+}
+
+@keyframes moveSquare {
+  from {
+    left: 0; /* First place of moving box */
+  }
+  to {
+    left: calc(100% - 20px); /* final place of moving box */
+  }
+}

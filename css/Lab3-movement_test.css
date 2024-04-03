@@ -1,0 +1,39 @@
+#bar-square {
+  position: relative;
+  width: 600px; /* bar width */
+  height: 50px; /* bar height */
+  background-color: #f0f0f0; /* bar color */
+  border: 3px solid #ccc;
+  left: calc((100% - 600px)/2);
+  margin-bottom: 50px;
+}
+
+#bar {
+  position: absolute;
+  top: 0;
+  left: 50%; /* Place the fixed box in the middle */
+  transform: translateX(-50%);
+  width: 50px; /* fixed box width */
+  height: 100%; /* fixed box height */
+  background-color: #ccc; /* fixed box color */
+}
+
+#square {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px; /* moving box width */
+  height: 100%; /* moving box height */
+  background-color: blue; /* moving box color */
+  animation: moveSquare 5s infinite alternate; /* add motion effects */
+}
+
+@keyframes moveSquare {
+  from {
+    left: 0; /* First place of moving box */
+  }
+  to {
+    left: calc(100% - 20px); /* final place of moving box */
+  }
+}

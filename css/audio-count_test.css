@@ -1,0 +1,17 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+
+#reactionTimeDisplay,
+#prevReactionTimeDisplay,
+#avgReactionTimeDisplay,
+#changeCounterDisplay,
+#resultText {
+    display: none;
+}
+
+button {
+    display: block;
+    margin: 10px auto;
+}
