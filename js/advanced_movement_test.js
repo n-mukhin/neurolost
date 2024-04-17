@@ -2,7 +2,7 @@ var startButton = document.getElementById("start");
 var buttonPressed = false;
 var tm
 const minSpeed = 500; // минимальная скорость вращения
-const maxSpeed = 1000; // максимальная скорость вращения
+const maxSpeed = 800; // максимальная скорость вращения
 var tm2
 var tm3
 var interval2
@@ -97,7 +97,7 @@ function startGame() {
 //----------------------------------------------------------------------------------
 function endGame() {
     clearInterval(timer);
-    save(results, test_id);
+    save(results);
     $("#circle").addClass("hidden");
     $("#circle2").addClass("hidden");
     $("#container > p").addClass("hidden");
@@ -139,13 +139,13 @@ function checkAnswer(){
 var angle = $("#circle2").rotationDegrees();
 var unghi = $("#circle").rotationDegrees();
 if (unghi < angle + 30 && unghi > 0) {
-    $("#result").text("+" + unghi);
+    $("#result").text("+" + unghi + "°");
     results.push(unghi);
     inaccuracy -= unghi
     rotatePoint()
 } else {
     if (unghi > angle - 30 && unghi < 0) {
-        $("#result").text(unghi);
+        $("#result").text(unghi + "°");
         results.push(unghi);
         inaccuracy -= unghi
         rotatePoint()
@@ -236,13 +236,13 @@ function checkAnswer2(){
     var angle2 = $("#circle4").rotationDegrees2();
     var unghi2 = $("#circle3").rotationDegrees2();
     if (unghi2 < -angle2 + 30 && unghi2 < 0) {
-        $("#result2").text("+" + ((Math.abs(unghi2 + 180))));
+        $("#result2").text("+" + ((Math.abs(unghi2 + 180))) + "°");
         inaccuracy2 -= (Math.abs(unghi2 + 180))
         results.push(Math.abs(unghi2 + 180));
         rotatePoint2()
     } else {
         if (unghi2 > angle2 - 30 && unghi2 > 0) {
-            $("#result2").text(unghi2 - 180);
+            $("#result2").text(unghi2 - 180 + "°");
             results.push(unghi2 - 180);
             inaccuracy2 -= (unghi2 - 180)
             rotatePoint2()
@@ -327,13 +327,13 @@ function checkAnswer2(){
         var angle3 = $("#circle6").rotationDegrees3();
         var unghi3 = $("#circle5").rotationDegrees3();
         if (unghi3 < angle3 + 30 && unghi3 > 90) {
-            $("#result3").text("+" + ((Math.abs(unghi3 - 90))));
+            $("#result3").text("+" + ((Math.abs(unghi3 - 90))) + "°");
             inaccuracy3 += (Math.abs(unghi3) - 90)
             results.push(Math.abs(unghi3 - 90));
             rotatePoint3()
         } else {
             if (unghi3 > angle3 - 30 && unghi3 < 90) {
-                $("#result3").text(unghi3 - 90);
+                $("#result3").text(unghi3 - 90 + "°");
                 results.push(unghi3 - 90);
                 inaccuracy3 += (unghi3 - 90)
                 rotatePoint3()
@@ -379,12 +379,27 @@ startButton.click();
 }
 });
 
-function save(results, test_id){
-    resultPost = '['
-    resultPost += results.join(',');
-    resultPost += ']';
-    post('./backend/save_result.php', {res: resultPost, test_id: test_id, correct: null, pulse: null}, method = 'post');
- }
+function save(results) {
+    // Вычисляем среднее значение из массива результатов
+    const averageResult = calculateAverage(results);
+    
+    // Отправляем только среднее значение на сервер
+    post('save_advanced_movement_test.php', { res: averageResult}, 'post');
+}
+
+function calculateAverage(results) {
+    if (results.length === 0) {
+        return 0; // Если массив результатов пуст, возвращаем 0
+    }
+
+    // Суммируем все результаты из массива
+    const sum = results.reduce((acc, curr) => acc + curr, 0);
+    
+    // Вычисляем среднее значение
+    const average = sum / results.length;
+
+    return average;
+}
  
 
 function post(path, params, method='post') {
