@@ -1,0 +1,86 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 36px;
+    text-align: center;
+}
+
+.box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    border: 2px solid #ccc;
+    margin-bottom: 20px;
+}
+
+.box-notice {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 200px;
+    border: 2px solid #ccc;
+    margin-bottom: 20px;
+    padding: 20px; /* Thiết lập lề cho phần tử .box-notice */
+}
+
+.box-notice p {
+    margin: 10px 0; /* Thiết lập lề trên và dưới cho các đoạn văn bản */
+    padding: 8px; /* Thiết lập lề bên trong các đoạn văn bản */
+    border-bottom: 1px solid #ccc; /* Thêm đường viền dưới cho mỗi đoạn văn bản */
+}
+
+.box-notice p:last-child {
+    border-bottom: none; /* Loại bỏ đường viền dưới cho đoạn văn bản cuối cùng */
+}
+
+
+
+.big-letter {
+    font-size: 72px;
+    font-weight: bold;
+}
+
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
