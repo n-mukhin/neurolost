@@ -2,7 +2,7 @@
 session_start();
 
 // Подключение к базе данных
-require_once "db_connect.php";
+require_once "db-connect.php";
 
 // Если пользователь уже вошел в систему, перенаправляем его на домашнюю страницу
 if(isset($_SESSION['user_id'])){
@@ -10,23 +10,30 @@ if(isset($_SESSION['user_id'])){
     exit;
 }
 
-
 // Проверяем, если форма входа отправлена
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
     // Ищем пользователя в базе данных
-    $query = "SELECT id, username FROM users WHERE username='$username' AND password='$password'";
-    $result = $mysqli->query($query);
+    $query = "SELECT id, username, password FROM users WHERE username=?";
+    $statement = $mysqli->prepare($query);
+    $statement->bind_param("s", $username);
+    $statement->execute();
+    $result = $statement->get_result();
 
     if ($result->num_rows == 1) {
-        // Если пользователь найден, устанавливаем сессию и перенаправляем на домашнюю страницу
+        // Если пользователь найден, проверяем пароль
         $row = $result->fetch_assoc();
-        $_SESSION['user_id'] = $row['id'];
-        $_SESSION['username'] = $row['username'];
-        header("Location: index.php");
-        exit;
+        if (password_verify($password, $row['password'])) {
+            // Если пароль верен, устанавливаем сессию и перенаправляем на домашнюю страницу
+            $_SESSION['user_id'] = $row['id'];
+            $_SESSION['username'] = $row['username'];
+            header("Location: index.php");
+            exit;
+        } else {
+            $error = "Неправильное имя пользователя или пароль";
+        }
     } else {
         $error = "Неправильное имя пользователя или пароль";
     }
@@ -46,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
     <div class="background"></div>
     <div class="container">
     <h2>Вход</h2>
-    <?php if(isset($error)) echo $error; ?>
+    <?php if(isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
     <form method="post" action="">
         <label for="username">Имя пользователя:</label><br>
         <input type="text" id="username" name="username"><br>
@@ -58,4 +65,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
     </div>
 </body>
 </html>
- 

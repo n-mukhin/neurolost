@@ -2,7 +2,7 @@
 session_start();
 
 // Подключение к базе данных
-require_once "db_connect.php";
+require_once "db-connect.php";
 
 // Если пользователь уже вошел в систему, перенаправляем его на домашнюю страницу
 if(isset($_SESSION['user_id'])){
@@ -16,6 +16,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
     $password = $_POST['password'];
     $code = $_POST['code']; // Добавляем код из формы
 
+    // Хеширование пароля
+    $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+
     // Проверяем, не занято ли имя пользователя
     $query = "SELECT id FROM users WHERE username=?";
     $statement = $mysqli->prepare($query);
@@ -28,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
         if(empty($code)){
             $query = "INSERT INTO users (username, password, expert_id) VALUES (?, ?, NULL)";
             $statement = $mysqli->prepare($query);
-            $statement->bind_param("ss", $username, $password);
+            $statement->bind_param("ss", $username, $hashed_password);
         } else {
             // Проверяем код в таблице experts
             $code_query = "SELECT id FROM experts WHERE code=?";
@@ -45,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
                 $role = 'expert';
                 $query = "INSERT INTO users (username, password, expert_id, role) VALUES (?, ?, ?, ?)";
                 $statement = $mysqli->prepare($query);
-                $statement->bind_param("ssis", $username, $password, $expert_id, $role);
+                $statement->bind_param("ssis", $username, $hashed_password, $expert_id, $role);
             } else {
                 $error = "Неправильный код эксперта.";
             }

@@ -10,7 +10,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 // Подключение к базе данных
-require_once "db_connect.php";
+require_once "db-connect.php";
 
 // Получаем информацию о текущем пользователе из базы данных
 $user_id = $_SESSION['user_id'];
@@ -27,30 +27,6 @@ if ($result->num_rows == 1) {
 $updateMessage = isset($_SESSION['updateMessage']) ? $_SESSION['updateMessage'] : null;
 unset($_SESSION['updateMessage']); // Очищаем сообщение из сессии
 
-// Функция для получения результатов тестов по категориям
-function getTestResultsByCategory($mysqli, $user_id) {
-    $query = "SELECT test_type, test_name, AVG(result) AS avg_result FROM test_results WHERE user_id = $user_id GROUP BY test_type, test_name";
-    $result = $mysqli->query($query);
-    if ($result->num_rows > 0) {
-        echo "<h3>Результаты тестов:</h3>";
-        echo "<table border='1'>
-                <tr>
-                    <th>Категория</th>
-                    <th>Название теста</th>
-                    <th>Средний результат</th>
-                </tr>";
-        while ($row = $result->fetch_assoc()) {
-            echo "<tr>";
-            echo "<td>" . $row['test_type'] . "</td>";
-            echo "<td>" . $row['test_name'] . "</td>";
-            echo "<td>" . $row['avg_result'] . "</td>";
-            echo "</tr>";
-        }
-        echo "</table>";
-    } else {
-        echo "Результаты тестов не найдены.";
-    }
-}
 
 ?>
 
@@ -91,7 +67,5 @@ function getTestResultsByCategory($mysqli, $user_id) {
             <p><?php echo $updateMessage; ?></p>
         <?php endif; ?>
 
-        <!-- Вывод результатов тестов -->
-        <?php getTestResultsByCategory($mysqli, $user_id); ?>
 </body>
 </html>

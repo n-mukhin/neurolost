@@ -2,7 +2,7 @@
 session_start();
 
 // Подключение к базе данных
-require_once "db_connect.php";
+require_once "db-connect.php";
 
 // Инициализация переменных
 $greeting = "";
